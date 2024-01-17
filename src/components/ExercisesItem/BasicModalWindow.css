@@ -1,0 +1,25 @@
+
+/* open */
+.modal--entering,
+.modal--entered {
+    opacity: 1;
+}
+
+.modal--entering .modal--content,
+.modal--entered .modal--content {
+    transform: translateY(0);
+}
+/* close */
+.modal--exiting,
+.modal--exided {
+    opacity: 0;
+}
+
+.modal--exiting .modal--content,
+.modal--entered .modal--content {
+    transform: translateY(-50px);
+}
+
+.countdown-timer {
+    color: #FFFFFF; /* Замініть на бажаний колір для цифр */
+  }
