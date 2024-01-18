@@ -83,4 +83,3 @@ export const BurnedCal = styled.p`
 export const BurnedInformName = styled.span`
     color: #E6533C;
 `;
-
