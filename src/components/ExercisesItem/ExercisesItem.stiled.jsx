@@ -97,4 +97,3 @@ export const Container = styled.ul`
    margin: 0 auto;
    background: var(--black, #040404);
 `;
-

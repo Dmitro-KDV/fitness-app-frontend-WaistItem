@@ -1,65 +1,152 @@
-import React, { useState } from 'react'; 
-import {Transition} from "react-transition-group"
-import {Modal, MadalWrapper, MadalContent, Image, Timer, BurnedCal, BurnedInformName} from './BasicModalWindow.stiled';
-import "./BasicModalWindow.css"
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import React, { useEffect, useState } from 'react';
+import { Transition } from 'react-transition-group';
+import {
+  StyledModal,
+  Modale,
+  MadalContent,
+  Image,
+  Timer,
+  BurnedCal,
+  BurnedInformName,
+  Ul,
+  Li,
+  Span,
+  P,
+  Button,
+  Div,
+  SvgPlay,
+  SvgPause,
+  Btn,
+  Svg,
+} from './BasicModalWindow.styled';
+import {AddExerciseSuccess} from "../ExercisesItem/AddExerciseSuccess/AddExerciseSuccess"
+import sprite from '../../assets/images/sprite.svg';
 
-export const BasicModalWindow = ({isOpen, onClose, Burned, Body, Target}) => {
-    const [pause, setPause] = useState(true);
+// import "./BasicModalWindow.css";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+let time = 10;
 
-    const onWrapperClick = (event) => {
-        if (event.target.classList.contains("modal-wrapper")) onClose();
+export const BasicModalWindow = ({ isOpen, onClose, Burned, Body, Target }) => {
+  const [pause, setPause] = useState(true);
+  const [burned, setBurned] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+
+
+  const onWrapperClick = event => {
+    if (event.target.classList.contains('modal-wrapper')) onClose();
+  };
+
+  useEffect(() => {
+    let intervalId = null;
+
+    if (isOpen && pause && burned < Burned) {
+      // if (burned > Burned) {
+      //   clearInterval(intervalId);
+      //   return;
+      // }
+      intervalId = setInterval(() => {
+        setBurned(prevBurned => {
+          const coloriy = (time * Burned) / 180;
+          const roundedNumber = Math.round(coloriy);
+          return roundedNumber;
+        });
+        time += 10;
+      }, 10000);
     }
 
-    // Burned = (час виконання) * Burned / 180 
+    return () => clearInterval(intervalId);
+  }, [isOpen, pause, burned, setBurned]);
 
-    return (
-        <>
-            <Transition in={isOpen} timeout={350} unmountOnExit={true}>
-            {(state) => (
-                <Modal className={`modal--${state}`}>
-                    <MadalWrapper className='modal-wrapper' onClick={onWrapperClick}>
-                        <MadalContent className='modal-content'>
-                            <Image></Image>
-                            <Timer>
-                            <CountdownCircleTimer
-                                isPlaying
-                                duration={180}
-                                colors={'#E6533C'}
-                                colorsTime={0}
-                                size={124}
-                                strokeWidth={4}
-                                trailColor={"rgba(239, 237, 232, 0.10)"}
-                                isGrowing={true}
-                                rotation={'counterclockwise'}
-                                strokeLinecap={'square'}
-                                isPlaying={pause}
-                                children={({ remainingTime }) => (
-                                    <div className="countdown-timer">
-                                      {`${Math.floor(remainingTime / 60)}:${remainingTime % 60}`}
-                                    </div>
-                                  )}
-                            >
-                            </CountdownCircleTimer>
-                            <button type="button" onClick={()=>setPause(!pause)}>
-                                {pause ? 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                                    <path d="M1 7.4C1 5.15979 1 4.03969 1.43597 3.18404C1.81947 2.43139 2.43139 1.81947 3.18404 1.43597C4.03969 1 5.15979 1 7.4 1H18.6C20.8402 1 21.9603 1 22.816 1.43597C23.5686 1.81947 24.1805 2.43139 24.564 3.18404C25 4.03969 25 5.15979 25 7.4V18.6C25 20.8402 25 21.9603 24.564 22.816C24.1805 23.5686 23.5686 24.1805 22.816 24.564C21.9603 25 20.8402 25 18.6 25H7.4C5.15979 25 4.03969 25 3.18404 24.564C2.43139 24.1805 1.81947 23.5686 1.43597 22.816C1 21.9603 1 20.8402 1 18.6V7.4Z" fill="#E6533C" stroke="#E6533C" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                :
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
-                                        <path d="M4.5 10.4C4.5 8.15979 4.5 7.03969 4.93597 6.18404C5.31947 5.43139 5.93139 4.81947 6.68404 4.43597C7.53969 4 8.65979 4 10.9 4H22.1C24.3402 4 25.4603 4 26.316 4.43597C27.0686 4.81947 27.6805 5.43139 28.064 6.18404C28.5 7.03969 28.5 8.15979 28.5 10.4V21.6C28.5 23.8402 28.5 24.9603 28.064 25.816C27.6805 26.5686 27.0686 27.1805 26.316 27.564C25.4603 28 24.3402 28 22.1 28H10.9C8.65979 28 7.53969 28 6.68404 27.564C5.93139 27.1805 5.31947 26.5686 4.93597 25.816C4.5 24.9603 4.5 23.8402 4.5 21.6V10.4Z" fill="#E6533C" stroke="#E6533C" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M13.168 20V12M19.8346 20V12" stroke="#EFEDE8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                } 
-                            </button>
-                            </Timer>
-                            <BurnedCal>Burned calories:  <BurnedInformName>{Burned}</BurnedInformName></BurnedCal>
-                        </MadalContent>
-                    </MadalWrapper>
-                </Modal>
-            )}
-            </Transition>
-        </>
-    )
-}
+  useEffect(() => {
+    const onKeydownEsc = e => {
+      if (e.code === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeydownEsc);
+    return () => {
+      window.removeEventListener('keydown', onKeydownEsc);
+    };
+  }, [onClose]);
+
+  const startPauseTimer = () => {
+    setPause(prevPause => !prevPause);
+  };
+  const namber = 180;
+
+  return (
+    <>
+    {/* <StyledModal> */}
+      <Transition in={isOpen} timeout={350} unmountOnExit={true}>
+        <Modale className="modal-wrapper" onClick={onWrapperClick}>
+          <MadalContent className="modal-content">
+            <Svg onClick={() => onClose()}>
+              <use href={`${sprite}#icon-x`}></use>
+            </Svg>
+            <Div>
+              <Image></Image>
+              <Timer>
+                <CountdownCircleTimer
+                  isPlaying={pause}
+                  duration={namber}
+                  colors={'#E6533C'}
+                  colorsTime={0}
+                  size={124}
+                  strokeWidth={4}
+                  trailColor={'rgba(239, 237, 232, 0.10)'}
+                  isGrowing={true}
+                  rotation={'counterclockwise'}
+                  strokeLinecap={'square'}
+                  children={({ remainingTime }) => (
+                    <div className="countdown-timer">
+                      {`${Math.floor(remainingTime / 60)}:${
+                        remainingTime % 60
+                      }`}
+                    </div>
+                  )}
+                ></CountdownCircleTimer>
+                <Btn type="button" onClick={startPauseTimer}>
+                  {pause ? (
+                    <SvgPlay>
+                      <use href={`${sprite}#icon-play`}></use>
+                    </SvgPlay>
+                  ) : (
+                    <SvgPause>
+                      <use href={`${sprite}#icon-pause`}></use>
+                    </SvgPause>
+                  )}
+                </Btn>
+              </Timer>
+              <BurnedCal>
+                Burned calories: <BurnedInformName>{burned}</BurnedInformName>
+              </BurnedCal>
+            </Div>
+            <Ul>
+              <Li>
+                <Span>Name</Span>
+                <P>Air bike</P>
+              </Li>
+              <Li>
+                <Span>Target</Span>
+                <P>{Target}</P>
+              </Li>
+              <Li>
+                <Span>Body Part</Span>
+                <P>{Body}</P>
+              </Li>
+              <Li>
+                <Span>Equipment</Span>
+                <P>Body weight</P>
+              </Li>
+              <Button type="button" onClick={() => setModalOpen(true)}>Add to diary</Button>
+              <AddExerciseSuccess
+                isOpen={modalOpen}
+                onClose={()=> setModalOpen(false)}
+                calories={burned}
+              />
+            </Ul>
+          </MadalContent>
+        </Modale>
+      </Transition>
+      {/* </StyledModal> */}
+    </>
+  );
+};
