@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import {
-  StyledModal,
   Modale,
   MadalContent,
   Image,
@@ -19,18 +18,13 @@ import {
   Btn,
   Svg,
 } from './BasicModalWindow.styled';
-import {AddExerciseSuccess} from "../ExercisesItem/AddExerciseSuccess/AddExerciseSuccess"
 import sprite from '../../assets/images/sprite.svg';
 
-// import "./BasicModalWindow.css";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 let time = 10;
 
-export const BasicModalWindow = ({ isOpen, onClose, Burned, Body, Target }) => {
+export const BasicModalWindow = ({ isOpen, onClose, onOpen, Burned, Body, Target, burned, setBurned }) => {
   const [pause, setPause] = useState(true);
-  const [burned, setBurned] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-
 
   const onWrapperClick = event => {
     if (event.target.classList.contains('modal-wrapper')) onClose();
@@ -40,10 +34,6 @@ export const BasicModalWindow = ({ isOpen, onClose, Burned, Body, Target }) => {
     let intervalId = null;
 
     if (isOpen && pause && burned < Burned) {
-      // if (burned > Burned) {
-      //   clearInterval(intervalId);
-      //   return;
-      // }
       intervalId = setInterval(() => {
         setBurned(prevBurned => {
           const coloriy = (time * Burned) / 180;
@@ -55,7 +45,7 @@ export const BasicModalWindow = ({ isOpen, onClose, Burned, Body, Target }) => {
     }
 
     return () => clearInterval(intervalId);
-  }, [isOpen, pause, burned, setBurned]);
+  }, [isOpen, pause, burned, setBurned, Burned]);
 
   useEffect(() => {
     const onKeydownEsc = e => {
@@ -70,11 +60,14 @@ export const BasicModalWindow = ({ isOpen, onClose, Burned, Body, Target }) => {
   const startPauseTimer = () => {
     setPause(prevPause => !prevPause);
   };
+  const openModal = () => {
+    onOpen()
+    onClose()
+  }
   const namber = 180;
 
   return (
     <>
-    {/* <StyledModal> */}
       <Transition in={isOpen} timeout={350} unmountOnExit={true}>
         <Modale className="modal-wrapper" onClick={onWrapperClick}>
           <MadalContent className="modal-content">
@@ -136,17 +129,11 @@ export const BasicModalWindow = ({ isOpen, onClose, Burned, Body, Target }) => {
                 <Span>Equipment</Span>
                 <P>Body weight</P>
               </Li>
-              <Button type="button" onClick={() => setModalOpen(true)}>Add to diary</Button>
-              <AddExerciseSuccess
-                isOpen={modalOpen}
-                onClose={()=> setModalOpen(false)}
-                calories={burned}
-              />
+              <Button type="button" onClick={openModal}>Add to diary</Button>
             </Ul>
           </MadalContent>
         </Modale>
       </Transition>
-      {/* </StyledModal> */}
     </>
   );
 };

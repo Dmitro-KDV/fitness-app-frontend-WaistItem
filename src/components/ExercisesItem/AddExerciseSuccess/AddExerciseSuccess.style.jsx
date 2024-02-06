@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
-export const Modal = styled.div` 
-    position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 100%; 
-    height: 100%; 
-    flex-shrink: 0; 
-    border-radius: 12px; 
-    border: 1px solid rgba(239, 237, 232, 0.20); 
-    background: rgba(4, 4, 4, 0.40);
-    overflow: hidden; 
-    overflow-y: auto; 
-    transition: opacity 0.3s; 
-    z-index: 999; 
+export const Modal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 237, 232, 0.2);
+  background: rgba(4, 4, 4, 0.4);
+  overflow: hidden;
+  overflow-y: auto;
+  transition: opacity 0.3s;
+  z-index: 999;
 `;
 
 export const MadalWrapper = styled.div`
@@ -24,42 +24,36 @@ export const MadalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; 
+  width: 100%;
   min-height: 100%;
 `;
 
-export const MadalContent = styled.div` 
-    position: relative; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column; 
-    width: 303px; 
-    border-radius: 20px; 
-    border-color: #ffff; 
-    background: #10100F; 
-    padding: 16px; 
-    transition: opacity 0.3s, transform 0.3s; 
-    @media screen and (min-width: 768px) { 
-        flex-direction: row; 
-        gap: 16px; 
-        align-items: flex-start; 
-        padding: 32px; 
-        padding-top: 39px; 
-        width: 631px; 
-    } 
+export const MadalContent = styled.div`
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 303px;
+  border-radius: 20px;
+  border-color: #ffff;
+  background: #10100f;
+  padding: 25px;
+  transition: opacity 0.3s, transform 0.3s;
+  @media screen and (min-width: 768px) {
+    gap: 16px;
+    padding: 32px;
+    padding-top: 39px;
+    width: 430px;
+  }
 `;
 
 export const Image = styled.div`
-  /* display: flex; */
   width: 270px;
   height: 226px;
-  // padding: 45px 105px;
-  /* justify-content: center; 
-    align-items: center; */
   margin: 0 auto;
   gap: 32px;
   margin-bottom: 32px;
@@ -88,9 +82,6 @@ export const BurnedCal = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  /* display: flex; 
-    justify-content: center; 
-    align-items: center; */
 `;
 
 export const BurnedInformName = styled.span`
@@ -112,37 +103,26 @@ export const Li = styled.li`
   display: flex;
   flex-direction: column;
   padding: 12px 50px 12px 18px;
-  /* width: 168px; */
   justify-content: center;
   align-items: left;
   border-radius: 12px;
   border: 1px solid rgba(239, 237, 232, 0.2);
   background: rgba(239, 237, 232, 0.05);
   gap: 4px;
-  /* width: 93px; */
   @media screen and (min-width: 768px) {
     padding: 12px 70px 12px 18px;
   }
 `;
 export const Span = styled.span`
-  color: rgba(239, 237, 232, 0.4);
-  font-feature-settings: 'clig' off, 'liga' off;
-  /* text-align: left; */
-  font-family: Roboto;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
+  color: #e6533c;
 `;
 export const P = styled.p`
-  width: 78px;
-  color: #efede8;
-  font-feature-settings: 'clig' off, 'liga' off;
+  color: rgba(239, 237, 232, 0.3);
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 18px;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
   margin: 0;
 `;
 export const Button = styled.button`
@@ -160,12 +140,6 @@ export const Button = styled.button`
   font-weight: 500;
   line-height: 18px;
   margin-top: 17px;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    bottom: 31px;
-    right: 31px;
-    margin-top: 0;
-  }
 `;
 export const Div = styled.div`
   text-align: center;
@@ -187,15 +161,34 @@ export const Btn = styled.button`
   background-color: #e6533c;
 `;
 
-export const Svg = styled.svg` 
-    display: none;
-    position: absolute; 
-    width: 26px;
-    height: 26px;
-    right: 10px; 
-    top: 10px; 
-    @media screen and (min-width: 768px) {
-      display: block;
-    }
+export const Svg = styled.svg`
+  display: none;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  right: 10px;
+  top: 10px;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
 `;
 
+export const H2 = styled.h2`
+  color: white;
+`;
+
+export const Button2 = styled.button`
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+margin-top: 16px;
+  background: transparent;
+  border: 0;
+  color: rgba(239, 237, 232, 0.3);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+`;

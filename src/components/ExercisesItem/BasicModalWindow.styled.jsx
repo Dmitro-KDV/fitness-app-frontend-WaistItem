@@ -67,12 +67,8 @@ export const MadalContent = styled.div`
 `;
 
 export const Image = styled.div`
-  /* display: flex; */
   width: 270px;
   height: 226px;
-  // padding: 45px 105px;
-  /* justify-content: center; 
-    align-items: center; */
   margin: 0 auto;
   gap: 32px;
   margin-bottom: 32px;
@@ -101,9 +97,6 @@ export const BurnedCal = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  /* display: flex; 
-    justify-content: center; 
-    align-items: center; */
 `;
 
 export const BurnedInformName = styled.span`
@@ -125,14 +118,12 @@ export const Li = styled.li`
   display: flex;
   flex-direction: column;
   padding: 12px 50px 12px 18px;
-  /* width: 168px; */
   justify-content: center;
   align-items: left;
   border-radius: 12px;
   border: 1px solid rgba(239, 237, 232, 0.2);
   background: rgba(239, 237, 232, 0.05);
   gap: 4px;
-  /* width: 93px; */
   @media screen and (min-width: 768px) {
     padding: 12px 70px 12px 18px;
   }
@@ -140,7 +131,6 @@ export const Li = styled.li`
 export const Span = styled.span`
   color: rgba(239, 237, 232, 0.4);
   font-feature-settings: 'clig' off, 'liga' off;
-  /* text-align: left; */
   font-family: Roboto;
   font-size: 12px;
   font-style: normal;

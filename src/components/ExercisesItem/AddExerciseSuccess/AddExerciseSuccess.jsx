@@ -5,40 +5,31 @@ import {
   Modal,
   MadalContent,
   Image,
-  Timer,
-  BurnedCal,
-  BurnedInformName,
-  Ul,
-  Li,
   Span,
   P,
   Button,
   Div,
-  SvgPlay,
-  SvgPause,
-  Btn,
   Svg,
+  H2,
+  Button2,
 } from './AddExerciseSuccess.style';
 import sprite from '../../../assets/images/sprite.svg';
-
-// import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { ModalProps } from 'antd';
-// import { AppDispatch } from '../../../redux';
-// import { setCalculatedCalories } from '../../../redux/products';
-
-// interface ProductAddedModalProps extends ModalProps {
-//   handleClose: () => void;
-//   calories: number;
-// }
+import { useEffect } from 'react';
 
 export const AddExerciseSuccess = ({ isOpen, onClose, calories }) => {
-  //   const dispatch = useDispatch<AppDispatch>();
-  //   const [buttonHover, setButtonHover] = useState(false);
   const onWrapperClick = event => {
     if (event.target.classList.contains('modal-wrapper')) onClose();
   };
 
+  useEffect(() => {
+    const onKeydownEsc = e => {
+      if (e.code === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeydownEsc);
+    return () => {
+      window.removeEventListener('keydown', onKeydownEsc);
+    };
+  }, [onClose]);
 
   return (
     <>
@@ -50,20 +41,19 @@ export const AddExerciseSuccess = ({ isOpen, onClose, calories }) => {
             </Svg>
             <Div>
               <Image></Image>
-              <h2>Well done</h2>
-              <p>
-                Your time:<span> 3 minutes</span>
-              </p>
-              <p>
-                Burned calories: <span>{calories}</span>
-              </p>
+              <H2>Well done</H2>
+              <P>
+                Your time:<Span> 3 minutes</Span>
+              </P>
+              <P>
+                Burned calories: <Span>{calories}</Span>
+              </P>
             </Div>
             <Button type="button">
-              Next exercise
+              Next product
             </Button>
-              <button type="button">
+              <Button2 type="button">
                 To the diary
-              </button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -80,6 +70,7 @@ export const AddExerciseSuccess = ({ isOpen, onClose, calories }) => {
                   stroke-linejoin="round"
                 />
               </svg>
+              </Button2>
           </MadalContent>
         </Modal>
       </Transition>
